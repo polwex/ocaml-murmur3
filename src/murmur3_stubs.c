@@ -13,6 +13,14 @@ CAMLprim value caml_murmur3_hash32(value data)
     CAMLreturn(caml_copy_int32(out));
 }
 
+CAMLprim value caml_murmur3_hash32_seed(value data, value seed)
+{
+    CAMLparam2(data, seed);
+    uint32_t out;
+    MurmurHash3_x86_32(String_val(data), caml_string_length(data), Int32_val(seed), &out);
+    CAMLreturn(caml_copy_int32(out));
+}
+
 CAMLprim value caml_murmur3_hash64(value data)
 {
     CAMLparam1(data);
